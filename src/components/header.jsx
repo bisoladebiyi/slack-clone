@@ -1,18 +1,21 @@
+// import { Accordion } from '@mui/material'
 import React from 'react'
-import styled from 'styled-components'
+import { AccessTime, HeaderContainer, HeadingAvatar, SearchInput } from '../styledComponents'
+
 
 const Header = () => {
     return (
         <HeaderContainer>
-
+            <div>
+            <AccessTime />
+          <SearchInput type="text" placeholder="Search" />
+          <HeadingAvatar />
+            </div>
+          {/* <Accordion /> */}
+      
         </HeaderContainer>
     )
 }
 
-const HeaderContainer = styled.div`
-    width: 100%;
-    height: 50px;
-    background: #350d36;
 
-`
 export default Header

@@ -1,8 +1,9 @@
 import React, {useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { signIn } from "../utils";
+
+import { GoogleBtn, Input, SignUpLogInContainer, SubmitBtn } from "../styledComponents";
+import { signInGoogle, signIn } from "../utils";
 
 
 const Login = () => {
@@ -18,8 +19,11 @@ const Login = () => {
           console.log(error)
     });
   };
+  const googleSignIn = () => {
+    signInGoogle().then((res)=> navigate("/dashboard")).catch((error)=> console.log(error))
+}
   return (
-    <SignUpContainer>
+    <SignUpLogInContainer>
       <div>
         <svg
           width="64"
@@ -48,6 +52,8 @@ const Login = () => {
           </g>
         </svg>
         <h2>Sign In To Slack2.0</h2>
+        <GoogleBtn onClick={googleSignIn}>Sign In With Google</GoogleBtn>
+        <p>or</p>
         {error && <p className="error">Email or password incorrect</p>}
         <form action="">
           <Input
@@ -63,75 +69,14 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </form>
-        <SubmitBtn onClick={() => logIn(email, password)}>Register</SubmitBtn>
+        <SubmitBtn onClick={() => logIn(email, password)}>Sign In</SubmitBtn>
         <p>
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </div>
-    </SignUpContainer>
+    </SignUpLogInContainer>
   );
 };
-const SignUpContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  > div {
-    text-align: center;
-    width: 40%;
-    > .error {
-     font-size: 13px;
-      color: red;
-    }
-    > h2 {
-      margin: 30px 0 30px;
-    }
-    > form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-    > p {
-      font-size: 15px;
-      > a {
-        color: #548cff;
-      }
-    }
-  }
-`;
 
-const Input = styled.input`
-  margin-bottom: 30px;
-  width: 80%;
-  height: 30px;
-  border: none;
-  border-radius: 7px;
-  padding: 2px 8px;
-  box-shadow: 0px 0px 0px 1px #e0e0e0;
-  transition: ease-in-out box-shadow 0.2s;
-  outline: none;
-  :hover,
-  :focus {
-    box-shadow: 0px 0px 0px 3px #d6e5fa;
-  }
-  ::placeholder {
-    color: rgb(191, 191, 191);
-  }
-`;
-const SubmitBtn = styled.button`
-  width: 60%;
-  border: none;
-  border-radius: 10px;
-  padding: 13px 0;
-  background: #502064;
-  color: #fff;
-  font-weight: bold;
-  margin-bottom: 10px;
-  cursor: pointer;
-  :hover {
-    background: #441c55;
-  }
-`;
 
 export default Login;
