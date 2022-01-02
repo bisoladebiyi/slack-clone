@@ -1,5 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "@firebase/auth"
-import { auth } from "./firebase"
+import { addDoc, collection } from "@firebase/firestore"
+import { auth, db } from "./firebase"
 
 
 export const isLoggedIn = () => {
@@ -46,4 +47,12 @@ export const logOut = async () => {
         throw(error)
     }
     
+}
+
+export const createChannel = async (newChannel) => {
+    try{
+        await addDoc(collection(db, "channels"), {names: newChannel})
+    }catch(error){
+        console.log(error)
+    }
 }

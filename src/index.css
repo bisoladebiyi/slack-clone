@@ -16,4 +16,14 @@ body, html, .Container, #root{
   height: 100%;
 
 }
+.channels{
+  padding: 0 20px;
+}
+.channels:hover{
+  background:#350d36;
+}
+.channel-heading{
+  margin-top:10px;
+}
+
 /* #350d36  */

@@ -148,6 +148,7 @@ export const SubmitBtn = styled.button`
 export const HeaderContainer = styled.div`
     width: 100%;
     background: #350d36;
+    border-bottom: 1px solid #fff8f359;
     >div{
         display: flex;
         justify-content: space-between;
@@ -159,7 +160,7 @@ export const HeaderContainer = styled.div`
 export const AccessTime = styled(AccessTimeIcon)`
  color: #F5F5F5;
  cursor:pointer;
- transform: scale(1)
+ transform: scale(0.8)
 `
 export const HeadingAvatar = styled(Avatar)`
     cursor:pointer;
@@ -182,17 +183,79 @@ color: #F5F5F5;
     text-align: center;
     font-size: 12px;
     color: #F5F5F5;
+    opacity: .8;
 }
 
 `
 
 // side nav 
 export const SideMenuContainer = styled.div`
-width:25%;
+width:20%;
 background: #481049;
 height:100%;
 `
 export const Container = styled.div`
 height: 100%;
 display:flex;
+`
+export const ChanelDiv = styled.div`
+width:100%;
+padding:13px 0px;
+border-bottom: 1px solid #fff8f359;
+color: #fff;
+margin-bottom:17px;
+>div{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding: 0 15px;
+}
+
+`
+export const ChanelName = styled.div`
+display: flex;
+align-items:center;
+> .arrow-down{
+  transform: scale(0.8)
+;}
+`
+export const EditBtn = styled.button`
+width:26px;
+height:26px;
+display:grid;
+place-items:center;
+background:#fff;
+border-radius:50%;
+border:none;
+cursor:pointer;
+:hover{
+  background: #eeeeee;
+}
+
+> .edit{
+  color: var(--slack-color);
+  transform: scale(0.7);
+}
+`
+export const SideItems = styled.div`
+display: flex;
+align-items: center;
+color: #eeeeee;
+font-size: 13px;
+padding: 3px 14px; 
+cursor:pointer;
+:hover{
+  background: #350d36;
+}
+> .item{
+  transform: scale(0.7);
+  margin-right:5px
+}
+> .channel{
+  transform: scale(1);
+  margin-right:5px
+}
+> p{
+  letter-spacing: .5px;
+}
 `
