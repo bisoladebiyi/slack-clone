@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
+import ChatSection from '../components/chatSection'
 import Header from '../components/header'
 import SideMenu from '../components/side-menu'
 import { Container } from '../styledComponents'
@@ -16,6 +17,7 @@ const Dashboard = () => {
             <Header />
            <Container>
            <SideMenu />
+           <ChatSection />
            </Container>
                 
          

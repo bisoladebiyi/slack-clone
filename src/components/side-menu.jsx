@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SideMenuContainer } from "../styledComponents";
+import { ChannelsContainer, SideMenuContainer } from "../styledComponents";
 import SideMenuHeader from "./sideMenuHeader";
 import SideMenuItems from "./sideMenuItems";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -11,17 +11,20 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import PermContactCalendarRoundedIcon from "@mui/icons-material/PermContactCalendarRounded";
 import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import ArrowDropDownRoundedIcon from "@mui/icons-material/ArrowDropDownRounded";
-import TagRoundedIcon from '@mui/icons-material/TagRounded';
+import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded';
+import TagRoundedIcon from "@mui/icons-material/TagRounded";
 import AddChannel from "./addChannel";
 import { db } from "../firebase";
 import { createChannel } from "../utils";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collection } from "@firebase/firestore";
-
+import SideMenuChannelContainer from "./sideMenuChannelContainer";
 
 const SideMenu = () => {
   const [showText, setShowText] = useState("More");
   const [visibility, setVisibility] = useState(false);
+  const [showChannels, setShowChannels] = useState(true)
+  const [uncollapsedIcon, setUncollapsedIcon ] = useState(false)
   const [channels, loading, error] = useCollection(collection(db, "channels"));
 
   const visible = () => {
@@ -33,14 +36,15 @@ const SideMenu = () => {
       setShowText("More");
     }
   };
-  const addChannel = () => {
-    const newChannel = prompt("Please enter channel name");
-    if (newChannel) {
-      createChannel(newChannel);
-    } else {
-      alert("There's gotta be a name man");
+
+  const showHideChannels = () => {
+    setShowChannels(!showChannels)
+    if(showChannels){
+        setUncollapsedIcon(true)
+    }else{
+        setUncollapsedIcon(false)
     }
-  };
+  }
   return (
     <SideMenuContainer>
       <SideMenuHeader />
@@ -64,24 +68,31 @@ const SideMenu = () => {
       <div onClick={visible}>
         <SideMenuItems Icon={MoreVertRoundedIcon} text={showText} />
       </div>
-      <div className="channel-heading">
+      <div className="channel-heading" onClick={showHideChannels}>
         <SideMenuItems
-          Icon={ArrowDropDownRoundedIcon}
+          Icon={uncollapsedIcon ? ArrowRightRoundedIcon : ArrowDropDownRoundedIcon }
           text="Channels"
           channel={true}
         />
       </div>
-      <div>
+      <AddChannel channelItems={true} />
+      {showChannels && <div>
         {channels?.docs.map((doc) => (
-          <div className="channels">
-            <SideMenuItems key={doc.id} text={doc.data().names} Icon={TagRoundedIcon} />
-          </div>
+      
+            <SideMenuChannelContainer
+              key={doc.id}
+              id={doc.id}
+              text={doc.data().names}
+              Icon={TagRoundedIcon}
+              channelItems={true}
+             
+            />
+     
         ))}
-      </div>
+      </div>}
+      
 
-      <div onClick={addChannel}>
-        <AddChannel />
-      </div>
+          
     </SideMenuContainer>
   );
 };
