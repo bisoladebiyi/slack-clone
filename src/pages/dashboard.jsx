@@ -20,8 +20,8 @@ const Dashboard = () => {
            <ChatSection />
            </Container>
                 
-         
-            <button onClick={logOutftn}>Sign Out</button>
+{/*          
+            <button onClick={logOutftn}>Sign Out</button> */}
         </div>
     )
 }

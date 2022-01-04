@@ -267,11 +267,16 @@ export const SideItems = styled.div`
 export const ChatSectionContainer = styled.div`
   width: 80%;
   position: relative;
+  overflow: scroll;
 `;
 export const ChatSectionHeader = styled.div`
   width: 100%;
   padding: 7px 20px;
   border: 1px solid #d5d5d5;
+  position:fixed; 
+  top:0;
+  background:#fff;
+  z-index: 999;
 `;
 export const ChannelNameContainer = styled.button`
   display: flex;
@@ -291,7 +296,7 @@ export const ChannelNameContainer = styled.button`
     transform: scale(0.8);
   }
 `;
-export const MessageBoxContainer = styled.div`
+export const MessageInputContainer = styled.div`
 
   > form {
    margin-left:50px;
@@ -330,3 +335,37 @@ export const SendBtn = styled.button`
 
  
 `;
+
+export const MessageBoxContainer = styled.div`
+display: flex;
+width:100%;
+height:auto;
+align-items: start;
+padding: 20px 20px;
+> .MuiSvgIcon-root{
+ color: gray;
+ transform: scale(1.3)
+}
+>div{
+  margin-left:10px;
+  >h4{
+    display: flex;
+    align-items: center;
+    >span{
+      font-size: 9px;
+      margin-left: 5px;
+      font-weight: 600;
+      color: #9D9D9D;
+    }
+  } 
+  > p{
+    color: #212121;
+    font-size: 15px;
+  }
+}
+
+`
+export const BottomPadding = styled.div`
+width:100%;
+height:30%
+`

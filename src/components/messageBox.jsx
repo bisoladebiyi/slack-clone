@@ -1,18 +1,14 @@
 import React from 'react'
-import { MessageBoxContainer, SendBtn } from '../styledComponents'
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
-
-const MessageBox = ({ name, id }) => {
+import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
+import { MessageBoxContainer } from '../styledComponents';
+const MessageBox = ({message, time, name}) => {
     return (
         <MessageBoxContainer>
-           
-            <form action="">
-                <input type="text" placeholder={`Message #${name}`} />
-                <SendBtn><SendRoundedIcon className="send"/></SendBtn>
-            </form>
-         
-            
- 
+            <AccountBoxRoundedIcon fontSize="large" />
+            <div>
+              <h4>{name}<span>{new Date(time?.toDate()).toUTCString()}</span></h4>
+                <p>{message}</p>
+            </div>
             
         </MessageBoxContainer>
     )

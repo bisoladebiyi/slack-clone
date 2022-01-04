@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ChannelsContainer, SideMenuContainer } from "../styledComponents";
+import React, { useEffect, useState } from "react";
+import { SideMenuContainer } from "../styledComponents";
 import SideMenuHeader from "./sideMenuHeader";
 import SideMenuItems from "./sideMenuItems";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -15,9 +15,7 @@ import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded';
 import TagRoundedIcon from "@mui/icons-material/TagRounded";
 import AddChannel from "./addChannel";
 import { db } from "../firebase";
-import { createChannel } from "../utils";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { collection } from "@firebase/firestore";
+import { collection, onSnapshot } from "@firebase/firestore";
 import SideMenuChannelContainer from "./sideMenuChannelContainer";
 
 const SideMenu = () => {
@@ -25,7 +23,11 @@ const SideMenu = () => {
   const [visibility, setVisibility] = useState(false);
   const [showChannels, setShowChannels] = useState(true)
   const [uncollapsedIcon, setUncollapsedIcon ] = useState(false)
-  const [channels, loading, error] = useCollection(collection(db, "channels"));
+  const [channels, setChannels] = useState(null);
+  useEffect(()=> {
+    const data = onSnapshot(collection(db, "channels"), (snapshot) =>  setChannels(snapshot))
+   return data
+  },[])
 
   const visible = () => {
     if (showText === "More") {
