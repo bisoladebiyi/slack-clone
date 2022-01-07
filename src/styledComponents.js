@@ -37,33 +37,6 @@ export const SecondContainer = styled(FirstContainer)`
     left: 0;
   }
 `;
-export const Button = styled.button`
-  background: none;
-  padding: 10px 15px;
-  position: absolute;
-  right: 10px;
-  margin-top: 30px;
-  border: 1px solid #fff;
-  color: #fff;
-  border-radius: 2px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all ease-in-out 0.2s;
-  :hover {
-    background: #fff;
-    color: var(--slack-color);
-  }
-`;
-
-export const Button2 = styled(Button)`
-  left: 10px;
-  border-color: var(--slack-color);
-  color: var(--slack-color);
-  :hover {
-    color: #fff;
-    background: var(--slack-color);
-  }
-`;
 
 // signup and login
 export const SignUpLogInContainer = styled.div`
@@ -109,6 +82,17 @@ export const GoogleBtn = styled.button`
     background: #4f81e6;
   }
 `;
+
+export const Button2 = styled(GoogleBtn)`
+position: absolute;
+left: 50%;
+bottom:35%;
+transform: translate(-50%, -50%);
+background:#548CFF;
+border:none;
+width:10%;
+border-radius:4px;
+`;
 export const Input = styled.input`
   margin-bottom: 30px;
   width: 80%;
@@ -147,6 +131,7 @@ export const HeaderContainer = styled.div`
   width: 100%;
   background: #350d36;
   border-bottom: 1px solid #fff8f359;
+  position:fixed;
   > div {
     display: flex;
     justify-content: space-between;
@@ -184,16 +169,19 @@ export const SearchInput = styled.input`
   }
 `;
 
-// side nav
-export const SideMenuContainer = styled.div`
-  width: 20%;
-  background: #481049;
-  height: 100%;
-`;
+
 export const Container = styled.div`
   height: 100%;
   display: flex;
 `;
+
+// side nav
+export const SideMenuContainer = styled.div`
+  width: 250px;
+  background: #481049;
+  margin-top:40px;
+`;
+
 export const ChanelDiv = styled.div`
   width: 100%;
   padding: 13px 0px;
@@ -265,17 +253,17 @@ export const SideItems = styled.div`
 
 // chat box
 export const ChatSectionContainer = styled.div`
-  width: 80%;
+  width:calc(100% - 250px);
   position: relative;
-  overflow: scroll;
+  margin-top:45px;
+  overflow-y: scroll;
 `;
 export const ChatSectionHeader = styled.div`
   width: 100%;
-  padding: 7px 20px;
+  padding: 5px 20px;
   border: 1px solid #d5d5d5;
-  position:fixed; 
-  top:0;
   background:#fff;
+  position:fixed;
   z-index: 999;
 `;
 export const ChannelNameContainer = styled.button`
@@ -338,7 +326,6 @@ export const SendBtn = styled.button`
 
 export const MessageBoxContainer = styled.div`
 display: flex;
-width:100%;
 height:auto;
 align-items: start;
 padding: 20px 20px;
@@ -366,6 +353,31 @@ padding: 20px 20px;
 
 `
 export const BottomPadding = styled.div`
-width:100%;
-height:30%
+height: 150px;
+
+`
+export const LogOutPopUp = styled.div`
+position: fixed;
+width:13%;
+padding: 14px 0;
+background: #eeeeee;
+z-index:9999;
+right:0;
+text-align: center;
+border-radius: 3px;
+border: 1px solid #2121214d;
+box-shadow: 1px 0px 2px 1px #2121214d;
+> button {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor:pointer;
+  font-weight: semi-bold;
+  padding: 6px 0;
+  color: #212121;
+  :hover{
+    background: #93B5C6;
+    color:#fff;
+  }
+}
 `

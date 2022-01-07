@@ -3,15 +3,14 @@ import React from 'react'
 import { AccessTime, HeaderContainer, HeadingAvatar, SearchInput } from '../styledComponents'
 
 
-const Header = () => {
+const Header = ({photo, showPopUp}) => {
     return (
         <HeaderContainer>
             <div>
             <AccessTime />
           <SearchInput type="text" placeholder="Search" />
-          <HeadingAvatar />
+          <HeadingAvatar onClick={showPopUp} src={photo} />
             </div>
-          {/* <Accordion /> */}
       
         </HeaderContainer>
     )

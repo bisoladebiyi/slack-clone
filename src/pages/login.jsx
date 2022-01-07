@@ -1,27 +1,27 @@
-import React, {useState } from "react";
+import { onAuthStateChanged } from "@firebase/auth";
+import React from "react";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { auth } from "../firebase";
 
-import { GoogleBtn, Input, SignUpLogInContainer, SubmitBtn } from "../styledComponents";
-import { signInGoogle, signIn } from "../utils";
-
+import { GoogleBtn, SignUpLogInContainer } from "../styledComponents";
+import { signInGoogle } from "../utils";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
   const navigate = useNavigate();
-  const logIn = (email, password) => {
-    signIn(email, password)
-      .then((response) => navigate("/dashboard"))
-      .catch((error) => {
-          setError(true)
-          console.log(error)
-    });
-  };
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  });
+
   const googleSignIn = () => {
-    signInGoogle().then((res)=> navigate("/dashboard")).catch((error)=> console.log(error))
-}
+    signInGoogle()
+      .then((res) => {
+        navigate("/dashboard");
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <SignUpLogInContainer>
       <div>
@@ -53,30 +53,9 @@ const Login = () => {
         </svg>
         <h2>Sign In To Slack2.0</h2>
         <GoogleBtn onClick={googleSignIn}>Sign In With Google</GoogleBtn>
-        <p>or</p>
-        {error && <p className="error">Email or password incorrect</p>}
-        <form action="">
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </form>
-        <SubmitBtn onClick={() => logIn(email, password)}>Sign In</SubmitBtn>
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
-        </p>
       </div>
     </SignUpLogInContainer>
   );
 };
-
 
 export default Login;

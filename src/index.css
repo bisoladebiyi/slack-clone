@@ -8,15 +8,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: Source Sans Pro;
+  
+}
+.Container{
   overflow: hidden;
-  scroll-behavior: smooth;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-body, html, .Container, #root{
+body, html, .Container, #root, .App{
   height: 100%;
 
 }

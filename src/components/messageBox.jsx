@@ -1,10 +1,10 @@
 import React from 'react'
-import AccountBoxRoundedIcon from '@mui/icons-material/AccountBoxRounded';
 import { MessageBoxContainer } from '../styledComponents';
-const MessageBox = ({message, time, name}) => {
+import { Avatar } from "@mui/material";
+const MessageBox = ({message, time, name, photo}) => {
     return (
         <MessageBoxContainer>
-            <AccountBoxRoundedIcon fontSize="large" />
+            <Avatar src={photo} variant="rounded" />
             <div>
               <h4>{name}<span>{new Date(time?.toDate()).toUTCString()}</span></h4>
                 <p>{message}</p>

@@ -8,7 +8,7 @@ const SideMenuHeader = () => {
         <ChanelDiv>
                 <div>
                     <ChanelName>
-                    <h4>Bee's Channel</h4>
+                    <h4>BEE 🐝</h4>
                     <KeyboardArrowDownIcon className="arrow-down"/>
                     </ChanelName> 
                     <EditBtn>

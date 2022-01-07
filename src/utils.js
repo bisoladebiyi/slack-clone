@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "@firebase/auth"
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "@firebase/auth"
 import { addDoc, collection, serverTimestamp  } from "@firebase/firestore"
 import { auth, db } from "./firebase"
 
@@ -17,15 +17,6 @@ export const signUp = async (email, password) => {
     try {
         const user = await createUserWithEmailAndPassword(auth, email, password)
         console.log(user)
-    } catch(error){
-        throw(error)
-    }
-    
-}
-export const signIn = async (email, password) => {
-    try {
-       const user = await signInWithEmailAndPassword(auth, email, password )
-       console.log(user)
     } catch(error){
         throw(error)
     }
@@ -62,7 +53,6 @@ export const addMessages = async (value, id) => {
     const messages = {
         message:value,
         timestamp: serverTimestamp(),
-        name:"Jane/John Doe"
     }
     try{
         await addDoc(collection(db, "channels", id, "messages"), messages)
