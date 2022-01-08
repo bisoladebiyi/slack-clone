@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { auth } from '../firebase'
-import { Button, Button2, FirstContainer, HomeContainer, SecondContainer } from '../styledComponents'
+import { Button2, FirstContainer, HomeContainer, SecondContainer } from '../styledComponents'
 
 
 
@@ -29,9 +29,7 @@ const Home = () => {
             </FirstContainer>
             <SecondContainer>
                 <div><h1>k2.0</h1>
-                {/* */}
-                </div>
-               
+                </div>    
             </SecondContainer>
             
             <Link to="login"><Button2>Sign In</Button2></Link> 

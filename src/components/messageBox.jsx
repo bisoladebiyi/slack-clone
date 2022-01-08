@@ -4,7 +4,7 @@ import { Avatar } from "@mui/material";
 const MessageBox = ({message, time, name, photo}) => {
     return (
         <MessageBoxContainer>
-            <Avatar src={photo} variant="rounded" />
+            <Avatar src={photo} variant="rounded" className="messageAvatar" />
             <div>
               <h4>{name}<span>{new Date(time?.toDate()).toUTCString()}</span></h4>
                 <p>{message}</p>

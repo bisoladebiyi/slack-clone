@@ -22,18 +22,7 @@ body, html, .Container, #root, .App{
   height: 100%;
 
 }
-.channels{
-  padding: 0 20px;
-  cursor: pointer;
-}
-.channels:hover{
-  background:#350d36;
-}
-.channel-heading{
-  margin-top:10px;
-}
-.msgBoxContainer{
-  padding-top: 50px;
-}
+
+
 
 /* #350d36  */

@@ -5,18 +5,20 @@ import {
   ChannelNameContainer,
   ChatSectionContainer,
   ChatSectionHeader,
-  LogOutPopUp,
+  PopUp,
+  Welcome,
 } from "../styledComponents";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MessageInput from "./messageInput";
 import { useCollection } from "react-firebase-hooks/firestore";
-import { collection , orderBy, query} from "@firebase/firestore";
+import { collection, orderBy, query} from "@firebase/firestore";
 import { db } from "../firebase";
 import MessageBox from "./messageBox";
-import { logOut } from "../utils";
+import { leaveChannel, logOut } from "../utils";
 
 
-const ChatSection = ({ data, name, photo, show }) => {
+
+const ChatSection = ({ data, name, photo, show, leave, showLeave }) => {
   const[value] = useCollection(data.id && query(collection(db, "channels", data.id, "messages"), orderBy("timestamp", "asc")))
   const chatRef = useRef(null);
   useEffect(() => {
@@ -25,21 +27,29 @@ const ChatSection = ({ data, name, photo, show }) => {
     });
   }, [value]);
 
+  const leaveChannelFtn = () => {
+   leaveChannel(data.id).then((res)=> window.location.reload())
+  }
   return (
     <ChatSectionContainer>
-      {show && <LogOutPopUp>
+      {show && <PopUp>
         <button onClick={logOut}>
         Sign Out Of Bee
         </button>
-        
-        </LogOutPopUp>}
+        </PopUp>} 
       {data && value ? (
         <div>
           <ChatSectionHeader className="sectionHeader">
-            <ChannelNameContainer>
+            <ChannelNameContainer onClick={showLeave}>
               <h3># {data.name}</h3>
               <KeyboardArrowDownIcon className="arrow-down" />
              </ChannelNameContainer>
+             {leave && <PopUp className="leaveChannel">
+               <button onClick={leaveChannelFtn}>
+                 Leave Channel
+               </button>
+             </PopUp>}
+             
           </ChatSectionHeader>
           <div className="msgBoxContainer">
             {value?.docs.map((doc) => {
@@ -55,7 +65,13 @@ const ChatSection = ({ data, name, photo, show }) => {
           <MessageInput chatRef={chatRef} name={data.name} id={data.id} />
         </div>
       ) : (
-        <div></div>
+        <Welcome>
+          <div>
+          <h2>Welcome To Slack 2.0</h2>
+          <p>Add a channel 😎 </p>
+          </div>
+          
+        </Welcome>
       )}
       
     </ChatSectionContainer>

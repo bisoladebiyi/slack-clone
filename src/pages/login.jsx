@@ -8,13 +8,11 @@ import { signInGoogle } from "../utils";
 
 const Login = () => {
   const navigate = useNavigate();
-
   onAuthStateChanged(auth, (user) => {
     if (user) {
       navigate("/dashboard");
     }
   });
-
   const googleSignIn = () => {
     signInGoogle()
       .then((res) => {

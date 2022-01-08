@@ -38,7 +38,7 @@ export const SecondContainer = styled(FirstContainer)`
   }
 `;
 
-// signup and login
+// login
 export const SignUpLogInContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -47,6 +47,9 @@ export const SignUpLogInContainer = styled.div`
   > div {
     text-align: center;
     width: 40%;
+    @media (max-width: 800px) {
+      width: 65%;
+    }
     > h2 {
       margin: 30px 0 30px;
     }
@@ -69,7 +72,7 @@ export const SignUpLogInContainer = styled.div`
   }
 `;
 export const GoogleBtn = styled.button`
-  width: 40%;
+  width: 43%;
   border: none;
   border-radius: 10px;
   padding: 10px 0;
@@ -81,17 +84,26 @@ export const GoogleBtn = styled.button`
   :hover {
     background: #4f81e6;
   }
+  @media (max-width: 800px) {
+    width: 70%;
+  }
+  @media (max-width: 400px) {
+    width: 90%;
+  }
 `;
 
 export const Button2 = styled(GoogleBtn)`
-position: absolute;
-left: 50%;
-bottom:35%;
-transform: translate(-50%, -50%);
-background:#548CFF;
-border:none;
-width:10%;
-border-radius:4px;
+  position: absolute;
+  left: 50%;
+  bottom: 35%;
+  transform: translate(-50%, -50%);
+  background: #548cff;
+  border: none;
+  width: 15%;
+  border-radius: 4px;
+  @media (max-width: 700px) {
+    width: 30%;
+  }
 `;
 export const Input = styled.input`
   margin-bottom: 30px;
@@ -131,18 +143,35 @@ export const HeaderContainer = styled.div`
   width: 100%;
   background: #350d36;
   border-bottom: 1px solid #fff8f359;
-  position:fixed;
+  position: fixed;
   > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2px 30px;
+    > button {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      > .menuIcon {
+        color: #f5f5f5;
+        tranform: scale(0.8);
+        display: none;
+        @media (max-width: 800px) {
+          display: flex;
+        }
+      }
+    }
   }
 `;
 export const AccessTime = styled(AccessTimeIcon)`
   color: #f5f5f5;
   cursor: pointer;
   transform: scale(0.8);
+  @media (max-width: 800px) {
+    display: none !important;
+  }
 `;
 export const HeadingAvatar = styled(Avatar)`
   cursor: pointer;
@@ -150,6 +179,9 @@ export const HeadingAvatar = styled(Avatar)`
 
   :hover {
     opacity: 0.9;
+  }
+  @media (max-width: 800px) {
+    transform: scale(0.65);
   }
 `;
 export const SearchInput = styled.input`
@@ -167,8 +199,10 @@ export const SearchInput = styled.input`
     color: #f5f5f5;
     opacity: 0.8;
   }
+  @media (max-width: 800px) {
+    width: 50%;
+  }
 `;
-
 
 export const Container = styled.div`
   height: 100%;
@@ -179,7 +213,16 @@ export const Container = styled.div`
 export const SideMenuContainer = styled.div`
   width: 250px;
   background: #481049;
-  margin-top:40px;
+  margin-top: 40px;
+  overflow: scroll;
+  @media (max-width: 800px) {
+    height: 100%;
+    position: fixed;
+    left: -150%;
+    width: 100%;
+    z-index: 999;
+    margin-top: 45px;
+  }
 `;
 
 export const ChanelDiv = styled.div`
@@ -253,18 +296,21 @@ export const SideItems = styled.div`
 
 // chat box
 export const ChatSectionContainer = styled.div`
-  width:calc(100% - 250px);
+  width: calc(100% - 250px);
+  @media (max-width: 800px) {
+    width: 100%;
+  }
   position: relative;
-  margin-top:45px;
+  margin-top: 45px;
   overflow-y: scroll;
 `;
 export const ChatSectionHeader = styled.div`
   width: 100%;
   padding: 5px 20px;
   border: 1px solid #d5d5d5;
-  background:#fff;
-  position:fixed;
-  z-index: 999;
+  background: #fff;
+  position: fixed;
+  z-index: 99;
 `;
 export const ChannelNameContainer = styled.button`
   display: flex;
@@ -285,15 +331,19 @@ export const ChannelNameContainer = styled.button`
   }
 `;
 export const MessageInputContainer = styled.div`
-
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
   > form {
-   margin-left:50px;
+    margin-left: 50px;
     position: relative;
-    position: fixed;
-      bottom:30px;
-      width:60%;
+    width: 60%;
+    @media (max-width: 800px) {
+      width: 80%;
+      margin: 0 auto;
+    }
     > input {
-      width:95%;
+      width: 95%;
       padding: 10px 2.5%;
       border: 2px solid #e6e6e6;
       border-radius: 3px;
@@ -305,79 +355,88 @@ export const MessageInputContainer = styled.div`
       }
     }
   }
- 
-    
-
 `;
 export const SendBtn = styled.button`
   position: absolute;
-  bottom:6px;
-  right:5px;
+  bottom: 6px;
+  right: 5px;
   background: none;
   border: none;
   color: grey;
   cursor: pointer;
-  > .send{
+  > .send {
     transform: scale(0.8);
   }
-
- 
 `;
 
 export const MessageBoxContainer = styled.div`
-display: flex;
-height:auto;
-align-items: start;
-padding: 20px 20px;
-> .MuiSvgIcon-root{
- color: gray;
- transform: scale(1.3)
-}
->div{
-  margin-left:10px;
-  >h4{
-    display: flex;
-    align-items: center;
-    >span{
-      font-size: 9px;
-      margin-left: 5px;
-      font-weight: 600;
-      color: #9D9D9D;
+  display: flex;
+  height: auto;
+  align-items: start;
+  padding: 20px 20px;
+  @media (max-width: 400px) {
+    padding: 20px 10px;
+  }
+  > .MuiSvgIcon-root {
+    color: gray;
+    transform: scale(1.3);
+  }
+  > div {
+    margin-left: 10px;
+    > h4 {
+      display: flex;
+      align-items: center;
+      @media (max-width: 400px) {
+        font-size: 14px;
+      }
+      > span {
+        font-size: 9px;
+        margin-left: 5px;
+        font-weight: 600;
+        color: #9d9d9d;
+      }
     }
-  } 
-  > p{
-    color: #212121;
-    font-size: 15px;
+    > p {
+      color: #212121;
+      font-size: 15px;
+    }
   }
-}
-
-`
+`;
 export const BottomPadding = styled.div`
-height: 150px;
-
-`
-export const LogOutPopUp = styled.div`
-position: fixed;
-width:13%;
-padding: 14px 0;
-background: #eeeeee;
-z-index:9999;
-right:0;
-text-align: center;
-border-radius: 3px;
-border: 1px solid #2121214d;
-box-shadow: 1px 0px 2px 1px #2121214d;
-> button {
-  width: 100%;
-  background: none;
-  border: none;
-  cursor:pointer;
-  font-weight: semi-bold;
-  padding: 6px 0;
-  color: #212121;
-  :hover{
-    background: #93B5C6;
-    color:#fff;
+  height: 150px;
+`;
+export const PopUp = styled.div`
+  position: fixed;
+  width: 13%;
+  padding: 14px 0;
+  background: #fff;
+  z-index: 9999;
+  right: 0;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #2121214d;
+  box-shadow: 1px 0px 2px 1px #2121214d;
+  > button {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: semi-bold;
+    padding: 6px 0;
+    color: #212121;
+    :hover {
+      background: #93b5c6;
+      color: #fff;
+    }
   }
-}
-`
+  @media (max-width: 800px) {
+    width: 120px;
+  }
+`;
+export const Welcome = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+`;

@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard';
 import Home from './pages/home';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import smoothscroll from 'smoothscroll-polyfill';
 
 function App() {
   return (
@@ -20,5 +21,7 @@ function App() {
     
   );
 }
+
+smoothscroll.polyfill();
 
 export default App;

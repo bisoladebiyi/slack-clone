@@ -3,7 +3,36 @@
   margin: 0;
 }
 
-html, #root, .App, body {
-  height: 100%;
+.channels{
+  padding: 0 20px;
+  cursor: pointer;
+}
+.channels:hover{
+  background:#350d36;
+}
+.channel-heading{
+  margin-top:10px;
+}
+.msgBoxContainer{
+  padding-top: 50px;
+}
+.color{
+  color: #93B5C6;
+}
+.leaveChannel{
+  left:250px
 }
 
+.showMenu{
+  left: 0% !important;
+}
+@media(max-width:800px){
+  .leaveChannel{
+    left: 20px;
+  }
+}
+@media(max-width:400px){
+.messageAvatar{
+  transform: scale(0.9);
+}
+}

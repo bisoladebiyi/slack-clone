@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "@firebase/auth"
-import { addDoc, collection, serverTimestamp  } from "@firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, serverTimestamp  } from "@firebase/firestore"
 import { auth, db } from "./firebase"
 
 
@@ -60,3 +60,7 @@ export const addMessages = async (value, id) => {
         console.log(error)
     }
 }
+export const leaveChannel = async(id) => {
+    await deleteDoc(doc(db, "channels", id))
+   
+  }

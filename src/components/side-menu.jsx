@@ -18,7 +18,7 @@ import { db } from "../firebase";
 import { collection, onSnapshot } from "@firebase/firestore";
 import SideMenuChannelContainer from "./sideMenuChannelContainer";
 
-const SideMenu = () => {
+const SideMenu = ({ show, showHideMenu }) => {
   const [showText, setShowText] = useState("More");
   const [visibility, setVisibility] = useState(false);
   const [showChannels, setShowChannels] = useState(true)
@@ -48,7 +48,7 @@ const SideMenu = () => {
     }
   }
   return (
-    <SideMenuContainer>
+    <SideMenuContainer className={show ? `showMenu` : ``}>
       <SideMenuHeader />
       <SideMenuItems Icon={ChatIcon} text="Thread" />
       <SideMenuItems Icon={AlternateEmailIcon} text="Mentions & reactions" />
@@ -78,7 +78,7 @@ const SideMenu = () => {
         />
       </div>
       <AddChannel channelItems={true} />
-      {showChannels && <div>
+      {showChannels && <div onClick={showHideMenu}>
         {channels?.docs.map((doc) => (
       
             <SideMenuChannelContainer
