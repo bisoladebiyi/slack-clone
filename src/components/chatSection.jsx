@@ -18,7 +18,7 @@ import { leaveChannel, logOut } from "../utils";
 
 
 
-const ChatSection = ({ data, name, photo, show, leave, showLeave }) => {
+const ChatSection = ({ data, show, leave, showLeave }) => {
   const[value] = useCollection(data.id && query(collection(db, "channels", data.id, "messages"), orderBy("timestamp", "asc")))
   const chatRef = useRef(null);
   useEffect(() => {
@@ -53,10 +53,10 @@ const ChatSection = ({ data, name, photo, show, leave, showLeave }) => {
           </ChatSectionHeader>
           <div className="msgBoxContainer">
             {value?.docs.map((doc) => {
-              const { message, timestamp } = doc.data();
+              const { message, timestamp, user } = doc.data();
               return (
                 <div key={doc.id}>
-                  <MessageBox message={message} time={timestamp} name={name} photo={photo} />
+                  <MessageBox message={message} time={timestamp} user={user} />
                 </div>
               );
             })}

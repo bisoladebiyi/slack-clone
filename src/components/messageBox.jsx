@@ -1,12 +1,12 @@
 import React from 'react'
 import { MessageBoxContainer } from '../styledComponents';
 import { Avatar } from "@mui/material";
-const MessageBox = ({message, time, name, photo}) => {
+const MessageBox = ({message, time, user}) => {
     return (
         <MessageBoxContainer>
-            <Avatar src={photo} variant="rounded" className="messageAvatar" />
+            <Avatar src={user.photoURL} variant="rounded" className="messageAvatar" />
             <div>
-              <h4>{name}<span>{new Date(time?.toDate()).toUTCString()}</span></h4>
+              <h4>{user.displayName}<span>{new Date(time?.toDate()).toUTCString()}</span></h4>
                 <p>{message}</p>
             </div>
             

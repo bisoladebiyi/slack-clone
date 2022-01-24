@@ -22,15 +22,17 @@ export const signUp = async (email, password) => {
     }
     
 }
+
 export const signInGoogle = async () => {
     const provider = new GoogleAuthProvider()
     try {
-      await signInWithPopup(auth, provider)
+       await signInWithPopup(auth, provider)
     } catch(error){
         throw(error)
     }
     
 }
+
 export const logOut = async () => {
     try {
       await signOut(auth)
@@ -49,10 +51,11 @@ export const createChannel = async (newChannel) => {
     }
 }
 
-export const addMessages = async (value, id) => {
+export const addMessages = async (value, id, user) => {
     const messages = {
         message:value,
         timestamp: serverTimestamp(),
+        user
     }
     try{
         await addDoc(collection(db, "channels", id, "messages"), messages)
@@ -63,4 +66,4 @@ export const addMessages = async (value, id) => {
 export const leaveChannel = async(id) => {
     await deleteDoc(doc(db, "channels", id))
    
-  }
+}
