@@ -6,40 +6,36 @@ import { onAuthStateChanged } from "@firebase/auth";
 import { auth } from "../firebase";
 
 const MessageInput = ({ name, id, chatRef }) => {
-  const [value, setValue] = useState("");
+  const [inputText, setInputText] = useState("");
   const [showColor, setShowColor] = useState(false);
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    if (value !== "") {
-      setShowColor(true);
-    } else {
-      setShowColor(false);
-    }
+    setShowColor(inputText);
     onAuthStateChanged(auth, (user) => {
       setUserData(user.providerData[0]);
     });
-  }, [value]);
+  }, [inputText]);
   const submitMessage = async (e) => {
     e.preventDefault();
-    if (value) {
-      addMessages(value, id, userData);
+    if (inputText) {
+      await addMessages(inputText, id, userData);
       chatRef.current.scrollIntoView({
         behavior: "smooth",
       });
-      setValue("");
+       setInputText("");
       setShowColor(false);
     }
   };
   const inputFtn = (e) => {
-    setValue(e.target.value);
+    setInputText(e.target.value);
   };
   return (
     <MessageInputContainer>
       <form action="">
         <input
           type="text"
-          value={value}
+          value={inputText}
           onChange={(e) => inputFtn(e)}
           placeholder={`Message #${name}`}
         />

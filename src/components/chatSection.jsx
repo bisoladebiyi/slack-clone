@@ -13,19 +13,19 @@ import MessageInput from "./messageInput";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collection, orderBy, query} from "@firebase/firestore";
 import { db } from "../firebase";
-import MessageBox from "./messageBox";
 import { leaveChannel, logOut } from "../utils";
+import MessageBoxContainer from "./messageBoxContainer";
 
 
 
 const ChatSection = ({ data, show, leave, showLeave }) => {
-  const[value] = useCollection(data.id && query(collection(db, "channels", data.id, "messages"), orderBy("timestamp", "asc")))
+  const[chats] = useCollection(data.id && query(collection(db, "channels", data.id, "messages"), orderBy("timestamp", "asc")))
   const chatRef = useRef(null);
   useEffect(() => {
     chatRef.current?.scrollIntoView({
       behavior: "smooth",
     });
-  }, [value]);
+  }, [chats]);
 
   const leaveChannelFtn = () => {
    leaveChannel(data.id).then((res)=> window.location.reload())
@@ -37,7 +37,7 @@ const ChatSection = ({ data, show, leave, showLeave }) => {
         Sign Out Of Bee
         </button>
         </PopUp>} 
-      {data && value ? (
+      {data && chats ? (
         <div>
           <ChatSectionHeader className="sectionHeader">
             <ChannelNameContainer onClick={showLeave}>
@@ -52,14 +52,7 @@ const ChatSection = ({ data, show, leave, showLeave }) => {
              
           </ChatSectionHeader>
           <div className="msgBoxContainer">
-            {value?.docs.map((doc) => {
-              const { message, timestamp, user } = doc.data();
-              return (
-                <div key={doc.id}>
-                  <MessageBox message={message} time={timestamp} user={user} />
-                </div>
-              );
-            })}
+           <MessageBoxContainer chats={chats} />
              <BottomPadding ref={chatRef} />
           </div>
           <MessageInput chatRef={chatRef} name={data.name} id={data.id} />
