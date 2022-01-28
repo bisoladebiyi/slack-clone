@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "@firebase/auth";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "../firebase";
 
@@ -8,15 +8,18 @@ import { signInGoogle } from "../utils";
 
 const Login = () => {
   const navigate = useNavigate();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  });
+  useEffect(()=> {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/dashboard");
+      }
+    });
+  }, [navigate])
+  
   const googleSignIn = () => {
     signInGoogle()
       .then((res) => {
-        navigate("/dashboard");
+        console.log(res)
       })
       .catch((error) => console.log(error));
   };

@@ -16,10 +16,10 @@ const MessageInput = ({ name, id, chatRef }) => {
       setUserData(user.providerData[0]);
     });
   }, [inputText]);
-  const submitMessage = async (e) => {
+  const submitMessage =  (e) => {
     e.preventDefault();
     if (inputText) {
-      await addMessages(inputText, id, userData);
+      addMessages(inputText, id, userData)
       chatRef.current.scrollIntoView({
         behavior: "smooth",
       });

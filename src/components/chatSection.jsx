@@ -28,7 +28,7 @@ const ChatSection = ({ data, show, leave, showLeave }) => {
   }, [chats]);
 
   const leaveChannelFtn = () => {
-   leaveChannel(data.id).then((res)=> window.location.reload())
+   leaveChannel(data.id)
   }
   return (
     <ChatSectionContainer>
