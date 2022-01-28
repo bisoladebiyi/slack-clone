@@ -7,8 +7,10 @@ import { Container } from "../styledComponents";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth } from "../firebase";
 
+
+
 const Dashboard = () => {
-  const [name, setName] = useState("");
+
   const [photo, setPhoto] = useState("");
   const [show, setShow] = useState(false);
   const [leave, setLeave] = useState(false);
@@ -18,8 +20,8 @@ const Dashboard = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate("/dashboard");
-        setName(user.displayName);
         setPhoto(user.photoURL);
+
       } else {
         navigate("/login");
       }
@@ -46,8 +48,6 @@ const Dashboard = () => {
       <Container>
         <SideMenu show={showMenu} showHideMenu={showHideMenu} />
         <ChatSection
-          name={name}
-          photo={photo}
           show={show}
           showLeave={showLeavePopUp}
           leave={leave}

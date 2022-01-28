@@ -1,66 +1,48 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "@firebase/auth"
-import { addDoc, collection, deleteDoc, doc, serverTimestamp  } from "@firebase/firestore"
-import { auth, db } from "./firebase"
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "@firebase/auth";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+} from "@firebase/firestore";
+import { auth, db } from "./firebase";
 
 
-
-export const isLoggedIn = () => {
-    if(localStorage.getItem("fbase_key") !== null) {
-        return true
-    }
-    else{
-        return false
-    }
-}
-
-export const signUp = async (email, password) => {
-    try {
-        const user = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(user)
-    } catch(error){
-        throw(error)
-    }
-    
-}
 export const signInGoogle = async () => {
-    const provider = new GoogleAuthProvider()
-    try {
-      await signInWithPopup(auth, provider)
-    } catch(error){
-        throw(error)
-    }
-    
-}
-export const logOut = async () => {
-    try {
-      await signOut(auth)
-
-    } catch(error){
-        throw(error)
-    }
-    
-}
-
-export const createChannel = async (newChannel) => {
-    try{
-        await addDoc(collection(db, "channels"), {names: newChannel})
-    }catch(error){
-        console.log(error)
-    }
-}
-
-export const addMessages = async (value, id) => {
-    const messages = {
-        message:value,
-        timestamp: serverTimestamp(),
-    }
-    try{
-        await addDoc(collection(db, "channels", id, "messages"), messages)
-    }catch(error){
-        console.log(error)
-    }
-}
-export const leaveChannel = async(id) => {
-    await deleteDoc(doc(db, "channels", id))
-   
+  const provider = new GoogleAuthProvider();
+  try {
+    const response = await signInWithPopup(auth, provider);
+    return response
+  } catch (error) {
+    throw error;
   }
+};
+
+export const logOut = () => {
+  signOut(auth).catch((error) => console.log(error));
+ 
+};
+
+export const createChannel = (newChannel) => {
+  addDoc(collection(db, "channels"), { names: newChannel })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+};
+
+export const addMessages =  (value, id, user) => {
+  const messages = {
+    message: value,
+    timestamp: serverTimestamp(),
+    user,
+  };
+    addDoc(collection(db, "channels", id, "messages"), messages).then((res)=> console.log(res)).catch((err)=> console.log(err))
+  
+};
+export const leaveChannel =  (id) => {
+  deleteDoc(doc(db, "channels", id)).then((res)=> window.location.reload());
+};
